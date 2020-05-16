@@ -5,6 +5,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AboutComponent} from "./about/about.component";
 import {AppComponent} from './app.component';
 import {HomeComponent} from "./home/home.component";
+import {FaqComponent} from "./faq/faq.component";
 import {NewsComponent} from "./news/news.component";
 import {TeamComponent} from './team/team.component';
 import {SharedModule} from "../shared.module";
@@ -13,6 +14,7 @@ import {SharedModule} from "../shared.module";
   declarations: [
     AboutComponent,
     AppComponent,
+    FaqComponent,
     HomeComponent,
     NewsComponent,
     TeamComponent
