@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "project-coswara"
+  },
+  "targets": {
+    "project-coswara": {
+      "hosting": {
+        "prod": [
+          "project-coswara-dev"
+        ],
+        "prod-record": [
+          "project-coswara-collect-dev"
+        ]
+      }
+    }
+  }
+}

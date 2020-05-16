@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	match /ANNOTATE_APPDATA/{document=**} {
+    	allow read;
+      allow write: if request.auth.uid != null;
+    }
+    match /ANNOTATE_DATA/{userId} {
+    	allow read;
+      allow write: if request.auth.uid == userId;
+    }
+    match /ANNOTATE_ERRORS/{userId} {
+    	allow read;
+      allow write: if request.auth.uid != null;
+    }
+    match /ANNOTATE_DATA/{userId}/DATA/{document=**} {
+    	allow read, write: if request.auth.uid == userId;
+    }
+  	match /COLLECT/{userId} {
+    	allow read, write: if request.auth.uid == userId;
+    }
+    match /COLLECT_STATS/{dateString}/{document=**} {
+    	allow read: if request.auth.uid != null;
+    }
+    match /FEEDBACK/{document=**} {
+    	allow read, write: if request.auth != null;
+    }
+    match /METADATA/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    match /HEALTH_DATA/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    match /USERS/{userId} {
+    	allow read, write: if request.auth.uid == userId;
+    }
+    match /USER_APPDATA/{document=**} {
+    	allow read, write: if request.auth.uid != null;
+    }
+    // match /USER_APPDATA/{userId} {
+    // 	allow read, write: if request.auth.uid == userId;
+    // }
+    match /USER_METADATA/{dateString}/{document=**} {
+    	allow read: if request.auth.uid != null;
+    }
+    match /USER_METADATA/{dateString}/DATA/{userId} {
+    	allow read, write: if request.auth.uid == userId;
+    }
+  }
+}

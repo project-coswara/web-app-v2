@@ -1,0 +1,47 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "USER_APPDATA",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cS",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dS",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "USER_APPDATA",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cS",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "p",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "USERS",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cS",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cSD",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
