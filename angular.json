@@ -48,22 +48,19 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
+              "src/favicon.png",
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "src/assets/styles/material-theme.scss",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -151,22 +148,19 @@
             "tsConfig": "projects/record-web-app/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/record-web-app/src/favicon.ico",
+              "projects/record-web-app/src/favicon.png",
               "projects/record-web-app/src/assets"
             ],
             "styles": [
-              "projects/record-web-app/src/styles.less"
+              "projects/record-web-app/src/styles.less",
+              "src/assets/styles/material-theme.scss",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/record-web-app/src/environments/environment.ts",
-                  "with": "projects/record-web-app/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
