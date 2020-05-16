@@ -5,6 +5,7 @@ import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
@@ -24,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     RouterModule,
+    BrowserAnimationsModule,
     CommonModule,
     FlexLayoutModule,
     FlexModule,
@@ -45,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   exports: [
     FooterComponent,
     NavbarComponent,
+    BrowserAnimationsModule,
     CommonModule,
     FlexLayoutModule,
     FlexModule,
