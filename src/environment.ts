@@ -28,8 +28,8 @@ export const environment = {
     'name': 'tabs.faq',
     'url': 'faq'
   }, {
-    'id': 'media',
-    'name': 'tabs.media',
-    'url': 'media'
+    'id': 'news',
+    'name': 'tabs.news',
+    'url': 'news'
   }]
 };

@@ -1,0 +1,14 @@
+<div class="component-container">
+    <h3 class="page-title">in the news</h3>
+    <div class="content">
+        We appreciate the media’s help in promoting our research and positively contributing to the data collection.
+        <div class="news-section" *ngFor="let nItem of newsContent">
+            <h5>{{nItem.lang}}</h5>
+            <ul>
+                <li class="news-content" *ngFor="let item of nItem.items">
+                    <a [href]="item.link">{{item.title}}, <span class="bold-text">{{item.paper}}</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
