@@ -11,8 +11,8 @@
             </div>
             <div class="tab-footer" fxLayout="row" fxLayoutAlign="end center">
                 <button *ngIf="!enableMetadata" class="button button-dark" (click)="enableMetadata = true; nextTab(tabs.selectedIndex)">{{'metadata.buttons.start' | translate}}</button>
-                <button *ngIf="enableMetadata" class="button" (click)="enableMetadata = true;">{{'metadata.buttons.start_over' | translate}}</button>
-                <button *ngIf="enableMetadata" class="button button-dark">{{'metadata.buttons.continue' | translate}}</button>
+                <button *ngIf="enableMetadata" class="button" (click)="enableMetadata = true; signOut()">{{'metadata.buttons.start_over' | translate}}</button>
+                <button *ngIf="enableMetadata" class="button button-dark" (click)="nextTab(tabs.selectedIndex)">{{'metadata.buttons.continue' | translate}}</button>
             </div>
         </mat-tab>
         <mat-tab [disabled]="!enableMetadata" label="{{'metadata.tabs.metadata' | translate}}">
@@ -89,11 +89,30 @@
             </div>
         </mat-tab>
         <mat-tab [disabled]="!formGroups.metadata.valid" label="{{'metadata.tabs.health_status' | translate}}">
-            <div class="tab-content"></div>
+            <div class="tab-content" fxLayout="column">
+                <div class="tab-sub-group" fxLayout="row wrap" fxLayoutAlign="start center" fxFlex>
+                    <h5 class="tab-sub-title" fxFlex="100">{{'forms.label.current_status' | translate}} <span>*</span></h5>
+                    <mat-radio-group class="radio-group" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px" [formControl]="formControls.currentStatus" required>
+                        <mat-radio-button class="tab-check-box"
+                                          [value]="hs"
+                                          *ngFor="let hs of listItems.currentStatusList"
+                                          fxFlex="100">
+                            {{'forms.option.' + hs | translate}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="tab-sub-group" fxLayout="row wrap" fxLayoutAlign="start center" fxFlex>
+                    <h5 class="tab-sub-title" fxFlex="100">{{'forms.label.health_conditions' | translate}} <span>*</span></h5>
+                    <div class="check-box-group" fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+                        <mat-checkbox class="check-box" [formControl]="formControls[cItem]" (change)="setHealthConditionsValidity()" *ngFor="let cItem of listItems.conditionList" fxFlex="32" fxFlex.xs="100">{{'forms.option.' + cItem | translate}}</mat-checkbox>
+                        <mat-checkbox class="check-box" [formControl]="formControls.none" (change)="resetStatus()" fxFlex="32" fxFlex.xs="100">{{'forms.option.none_of_the_above' | translate}}</mat-checkbox>
+                    </div>
+                </div>
+            </div>
             <div class="tab-footer" fxLayout="row" fxLayoutAlign="end center">
                 <button class="button" (click)="previousTab(tabs.selectedIndex)">{{'metadata.buttons.previous' | translate}}</button>
                 <div fxFlex></div>
-                <button class="button button-dark" (click)="nextTab(tabs.selectedIndex)">{{'metadata.buttons.submit' | translate}}</button>
+                <button *ngIf="this.formGroups.healthData.valid" class="button button-dark">{{'metadata.buttons.submit' | translate}}</button>
             </div>
         </mat-tab>
     </mat-tab-group>
