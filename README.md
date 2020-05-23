@@ -10,7 +10,7 @@ The angular application contains the main web page `coswara.iisc.ac.in` along wi
 
 ### Architecture
  - We use Firebase [Authentication](https://firebase.google.com/products/auth) to login the user as an anonymous user which gives a unique user id to store user metadata and audio collected
- - Ask the user to accept the disclaimer and provide the metadata, which is saved to [Firebase Firestore](https://firebase.google.com/products/firestore) which is a noSQL database at key `USER_METADATA/{dateString}/DATA/{userId}`
+ - Ask the user to accept the disclaimer and provide the metadata, which is saved to Firebase [Firestore](https://firebase.google.com/products/firestore) which is a noSQL database at key `USER_METADATA/{dateString}/DATA/{userId}`
  - Some app data will be stored to enable user to resume from where he/she has left off which is saved at `USER_APPDATA/{userId}`
  - Once user finishes and submits the metadata, he/she will be redirected to recording page to record 9 sets of audio which will be uploaded in Firebase [Cloud Storage](https://firebase.google.com/products/storage) after every recording at `<BUCKET>/AUDIO_DATA/{dateString}/{userId}/{recordStage}.wav`
  - When the user finishes all the stages, he/she will be redirected to thank you page and with help of Firebase [Cloud Functions](https://firebase.google.com/products/functions), the user's metadata will be read from Firestore and saved as  `metadata.json` in the above mentioned location
