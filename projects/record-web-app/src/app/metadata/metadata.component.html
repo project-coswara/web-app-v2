@@ -1,0 +1,100 @@
+<div class="component-container">
+    <h4 class="page-title">{{'metadata.title.no_metadata' | translate}}</h4>
+    <mat-tab-group #tabGroup [dynamicHeight]="true">
+        <mat-tab label="{{'metadata.tabs.disclaimer' | translate}}">
+            <div class="tab-content">
+                <p [innerHTML]="'metadata.disclaimer.para1' | translate"></p>
+                <p [innerHTML]="'metadata.disclaimer.para2' | translate"></p>
+                <p [innerHTML]="'metadata.disclaimer.para3' | translate"></p>
+                <p [innerHTML]="'metadata.disclaimer.para4' | translate"></p>
+                <p [innerHTML]="'metadata.disclaimer.para5' | translate"></p>
+            </div>
+            <div class="tab-footer" fxLayout="row" fxLayoutAlign="end center">
+                <button *ngIf="!enableMetadata" class="button button-dark" (click)="enableMetadata = true; nextTab(tabs.selectedIndex)">{{'metadata.buttons.start' | translate}}</button>
+                <button *ngIf="enableMetadata" class="button" (click)="enableMetadata = true;">{{'metadata.buttons.start_over' | translate}}</button>
+                <button *ngIf="enableMetadata" class="button button-dark">{{'metadata.buttons.continue' | translate}}</button>
+            </div>
+        </mat-tab>
+        <mat-tab [disabled]="!enableMetadata" label="{{'metadata.tabs.metadata' | translate}}">
+            <div class="tab-content" fxLayout="column">
+                <div class="tab-sub-group">
+                    <mat-form-field fxFlex="10" fxFlex.xs="27">
+                        <mat-label>{{'forms.label.age' | translate}}</mat-label>
+                        <input type="number" [formControl]="formControls.age" matInput required>
+                        <mat-error *ngIf="formControls.age.hasError('required')">{{'forms.errors.required' | translate}}</mat-error>
+                        <mat-error *ngIf="formControls.age.hasError('min') || formControls.age.hasError('max')">{{'forms.errors.age.valid' | translate}}</mat-error>
+                    </mat-form-field>
+                    <div fxFlex="3" fxFlex.xs="5"></div>
+                    <mat-form-field fxFlex="17" fxFlex.xs="67">
+                        <mat-label>{{'forms.label.gender' | translate}}</mat-label>
+                        <mat-select [formControl]="formControls.gender" required>
+                            <mat-option *ngFor="let genderItem of listItems.genderList" [value]="genderItem.toLowerCase()">{{'forms.options.' + genderItem.toLowerCase() | translate}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formControls.gender.hasError('required')">{{'forms.errors.required' | translate}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="tab-sub-group" fxLayout="column">
+                    <h5 class="tab-sub-title">{{'forms.label.english_proficient' | translate}} <span>*</span></h5>
+                    <mat-radio-group class="radio-group"
+                                     fxLayout="row wrap"
+                                     fxLayoutAlign="start center"
+                                     fxFlex fxFlex.xs="100"
+                                     [formControl]="formControls.englishProficient">
+                        <mat-radio-button class="tab-check-box" value="y" fxFlex="13" fxFlex.xs="25">{{'forms.options.yes' | translate}}</mat-radio-button>
+                        <mat-radio-button class="tab-check-box" value="n" fxFlex="13" fxFlex.xs="25">{{'forms.options.no' | translate}}</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="tab-sub-group" fxLayout="column">
+                    <h5 class="tab-sub-title">{{'forms.label.returning_user' | translate}} </h5>
+                    <mat-radio-group class="radio-group"
+                                     fxLayout="row wrap"
+                                     fxLayoutAlign="start center"
+                                     fxFlex fxFlex.xs="100"
+                                     [formControl]="formControls.returningUser">
+                        <mat-radio-button class="tab-check-box" value="y" fxFlex="13" fxFlex.xs="25">{{'forms.options.yes' | translate}}</mat-radio-button>
+                        <mat-radio-button class="tab-check-box" value="n" fxFlex="13" fxFlex.xs="25">{{'forms.options.no' | translate}}</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="tab-sub-group" fxLayout="row wrap" fxLayoutAlign="start center" fxFlex>
+                    <h5 class="tab-sub-title" fxFlex="100">{{'forms.label.location' | translate}}</h5>
+                    <mat-form-field fxFlex="30" fxFlex.xs>
+                        <mat-label>{{'forms.label.country' | translate}}</mat-label>
+                        <mat-select [formControl]="formControls.country" (selectionChange)="getStates()" required>
+                            <mat-option *ngFor="let country of listItems.countryList" [value]="country">{{country}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formControls.country.hasError('required')">{{'forms.errors.required' | translate}}</mat-error>
+                    </mat-form-field>
+                    <div fxFlex="5" fxHide.xs></div>
+                    <mat-form-field fxFlex="29" fxFlex.xs>
+                        <mat-label>{{'forms.label.state' | translate}}</mat-label>
+                        <mat-select [formControl]="formControls.state" required>
+                            <mat-option *ngFor="let state of selectedStateList" [value]="state">{{state}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formControls.state.hasError('required')">{{'forms.errors.required' | translate}}</mat-error>
+                    </mat-form-field>
+                    <div fxFlex="5" fxHide.xs></div>
+                    <mat-form-field fxFlex="30" fxFlex.xs>
+                        <mat-label>{{'forms.label.locality' | translate}}</mat-label>
+                        <input type="text" [formControl]="formControls.locality" matInput>
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutAlign="end center" fxFlexFill>
+                        <span class="smaller-text">{{'forms.errors.field_required' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-footer" fxLayout="row" fxLayoutAlign="end center">
+                <button class="button" (click)="previousTab(tabs.selectedIndex)">{{'metadata.buttons.previous' | translate}}</button>
+                <div fxFlex></div>
+                <button *ngIf="formGroups.metadata.valid" class="button button-dark" (click)="nextTab(tabs.selectedIndex)">{{'metadata.buttons.next' | translate}}</button>
+            </div>
+        </mat-tab>
+        <mat-tab [disabled]="!formGroups.metadata.valid" label="{{'metadata.tabs.health_status' | translate}}">
+            <div class="tab-content"></div>
+            <div class="tab-footer" fxLayout="row" fxLayoutAlign="end center">
+                <button class="button" (click)="previousTab(tabs.selectedIndex)">{{'metadata.buttons.previous' | translate}}</button>
+                <div fxFlex></div>
+                <button class="button button-dark" (click)="nextTab(tabs.selectedIndex)">{{'metadata.buttons.submit' | translate}}</button>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

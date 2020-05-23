@@ -26,7 +26,7 @@ export class AppComponent {
   constructor(private appService: AppService, activatedRoute: ActivatedRoute, translateService: TranslateService) {
     activatedRoute.queryParams.subscribe((queryParams) => {
       this.appService.setLoader(true);
-      this.locale = queryParams.locale || this.locale;
+      this.locale = queryParams.locale;
       translateService.use(this.locale).subscribe(() => {
         this.appService.setLoader(false);
       });
