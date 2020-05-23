@@ -1,0 +1,12 @@
+<div class="component-container">
+    <div class="info-box" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="material-icons">info</mat-icon>
+        {{'record.message.info' | translate}}
+    </div>
+    <mat-vertical-stepper [linear]="true" #stepper>
+        <mat-step *ngFor="let stageId of listItems.recordStages">
+            <ng-template matStepLabel>{{'record.title.' + stageId | translate}}</ng-template>
+            <div class="description">{{'record.description.' + stageId | translate}}</div>
+        </mat-step>
+    </mat-vertical-stepper>
+</div>
