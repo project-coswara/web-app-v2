@@ -6,7 +6,8 @@
                 <p [innerHTML]="'metadata.disclaimer.para1' | translate"></p>
                 <p [innerHTML]="'metadata.disclaimer.para2' | translate"></p>
                 <p [innerHTML]="'metadata.disclaimer.para3' | translate"></p>
-                <p [innerHTML]="'metadata.disclaimer.para4' | translate"></p>
+                <p *ngIf="!enableMetadata" [innerHTML]="'metadata.disclaimer.para4' | translate"></p>
+                <p *ngIf="enableMetadata" [innerHTML]="'metadata.disclaimer.para4.alternate' | translate"></p>
                 <p [innerHTML]="'metadata.disclaimer.para5' | translate"></p>
             </div>
             <div class="tab-footer" fxLayout="row" fxLayoutAlign="end center">
@@ -112,7 +113,7 @@
             <div class="tab-footer" fxLayout="row" fxLayoutAlign="end center">
                 <button class="button" (click)="previousTab(tabs.selectedIndex)">{{'metadata.buttons.previous' | translate}}</button>
                 <div fxFlex></div>
-                <button *ngIf="this.formGroups.healthData.valid" class="button button-dark">{{'metadata.buttons.submit' | translate}}</button>
+                <button *ngIf="this.formGroups.healthData.valid" class="button button-dark" (click)="submitMetadata()">{{'metadata.buttons.submit' | translate}}</button>
             </div>
         </mat-tab>
     </mat-tab-group>

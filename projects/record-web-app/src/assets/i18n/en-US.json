@@ -8,6 +8,7 @@
 	"metadata.disclaimer.para2": "The entire recording and data collection should take about 5 minutes only. Please keep your device around 20 cm from your face during the recording and perform the recording in a quiet environment. The recording device should not be shared with others before cleaning/sanitation.",
 	"metadata.disclaimer.para3": "The Indian Institute of Science Ethics Committee has approved the procedure for non-invasive recordings.",
 	"metadata.disclaimer.para4": "By clicking start you will proceed to data and stimuli collection, accepting our <a href='https://coswara.iisc.ac.in/terms' target='_blank'>terms and conditions</a>",
+	"metadata.disclaimer.para4.alternate": "You have accepted our <a href='https://coswara.iisc.ac.in/terms' target='_blank'>terms and conditions</a>",
 	"metadata.disclaimer.para5": "For any questions, please contact <a href='mailto:sriramg@iisc.ac.in'>sriramg@iisc.ac.in</a>",
 	"metadata.buttons.start": "start",
 	"metadata.buttons.start_over": "start over",

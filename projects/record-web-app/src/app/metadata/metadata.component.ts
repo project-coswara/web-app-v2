@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTabGroup} from "@angular/material/tabs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatTabGroup} from "@angular/material/tabs";
+import {Router} from "@angular/router";
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -22,8 +23,8 @@ export class MetadataComponent implements OnInit {
     englishProficient: new FormControl('y', [Validators.required]),
     returningUser: new FormControl('n'),
     country: new FormControl(null, [Validators.required]),
-    state: new FormControl({value:null, disabled:true}, [Validators.required]),
-    locality: new FormControl(null ),
+    state: new FormControl({value: null, disabled: true}, [Validators.required]),
+    locality: new FormControl(null),
     currentStatus: new FormControl(null, [Validators.required]),
     conditionStatus: new FormControl(null, [Validators.required]),
     cold: new FormControl(false),
@@ -72,7 +73,7 @@ export class MetadataComponent implements OnInit {
 
   @ViewChild('tabGroup', {static: false}) tabs: MatTabGroup;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -85,8 +86,8 @@ export class MetadataComponent implements OnInit {
         .toLowerCase()
         .replace(/ /g, '_')
         .replace('(', '')
-        .replace(')','')
-    ];
+        .replace(')', '')
+      ];
     if (this.selectedStateList.length === 0) {
       this.formControls.state.disable();
     } else {
@@ -109,8 +110,7 @@ export class MetadataComponent implements OnInit {
         this.formControls[item].setValue(false);
       })
       this.formControls.conditionStatus.setValue(true)
-    }
-    else {
+    } else {
       this.listItems.conditionList.forEach((item) => {
         this.formControls[item].enable();
       })
@@ -132,5 +132,9 @@ export class MetadataComponent implements OnInit {
 
   signOut() {
     firebase.auth().signOut().then();
+  }
+
+  submitMetadata() {
+    this.router.navigate(['record']).then();
   }
 }
