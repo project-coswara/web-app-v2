@@ -1,8 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
 import {AppService} from "../../../../src/app/services/app.service";
+import {environment} from "../../../../src/environment";
 
 @Component({
   selector: 'cs-record-root',
@@ -19,21 +23,33 @@ import {AppService} from "../../../../src/app/services/app.service";
   `
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   appLoader = true;
   locale = 'en-US'
 
   constructor(private appService: AppService, activatedRoute: ActivatedRoute, translateService: TranslateService) {
     activatedRoute.queryParams.subscribe((queryParams) => {
-      this.appService.setLoader(true);
+      this.appService.addLoadComponent('translate');
       this.locale = queryParams.locale;
       translateService.use(this.locale).subscribe(() => {
-        this.appService.setLoader(false);
+        this.appService.removeLoadedComponent('translate');
       });
     })
 
     appService.getLoader().subscribe((value => {
       this.appLoader = value;
     }))
+  }
+
+  ngOnInit(): void {
+    this.appService.addLoadComponent('firebase-auth')
+    firebase.initializeApp(environment.firebaseConfig);
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.appService.removeLoadedComponent('firebase-auth')
+      } else {
+        firebase.auth().signInAnonymously().then();
+      }
+    })
   }
 }

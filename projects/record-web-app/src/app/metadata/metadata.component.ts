@@ -4,9 +4,11 @@ import {MatTabGroup} from "@angular/material/tabs";
 import {Router} from "@angular/router";
 
 import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import 'firebase/firestore';
 
 import {environment} from "../../environment";
+import {AppService} from "../../../../../src/app/services/app.service";
 
 @Component({
   selector: 'pc-metadata',
@@ -73,7 +75,7 @@ export class MetadataComponent implements OnInit {
 
   @ViewChild('tabGroup', {static: false}) tabs: MatTabGroup;
 
-  constructor(private router: Router) {
+  constructor(private appService: AppService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -131,6 +133,7 @@ export class MetadataComponent implements OnInit {
   }
 
   signOut() {
+    this.appService.addLoadComponent('firebase-auth')
     firebase.auth().signOut().then();
   }
 

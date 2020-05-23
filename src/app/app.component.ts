@@ -27,10 +27,10 @@ export class AppComponent {
 
   constructor(private appService: AppService, activatedRoute: ActivatedRoute, translateService: TranslateService) {
     activatedRoute.queryParams.subscribe((queryParams) => {
-      this.appService.setLoader(true);
+      this.appService.addLoadComponent('translate');
       this.locale = queryParams.locale || this.locale;
       translateService.use(this.locale).subscribe(() => {
-        this.appService.setLoader(false);
+        this.appService.removeLoadedComponent('translate');
       });
     })
 
